@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #fullscreenContainer {
+            width: 300px;
+            height: 200px;
+            border: 2px solid black;
+            transition: all 0.5s;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="fullscreenContainer">
+        <p>This is the fullscreen container.</p>
+        <button id="toggleFullscreen">Toggle Fullscreen</button>
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const fullscreenContainer = document.getElementById('fullscreenContainer');
+        const toggleFullscreenBtn = document.getElementById('toggleFullscreen');
+    
+        toggleFullscreenBtn.addEventListener('click', function () {
+            if (document.fullscreenElement) {
+                document.exitFullscreen().then(() => exitFullscreenHandler());
+            } else {
+                fullscreenContainer.requestFullscreen().then(() => enterFullscreenHandler());
+            }
+        });
+    
+        function enterFullscreenHandler() {
+            console.log('Entered fullscreen mode');
+            updateStyles(true);
+        }
+    
+        function exitFullscreenHandler() {
+            console.log('Exited fullscreen mode');
+            updateStyles(false);
+        }
+    
+        function updateStyles(isFullscreen) {
+            fullscreenContainer.style.background = isFullscreen ? 'black' : '';
+            fullscreenContainer.style.color = isFullscreen ? 'white' : '';
+        }
+    });
+    </script>
+     
+</body>
+</html>
